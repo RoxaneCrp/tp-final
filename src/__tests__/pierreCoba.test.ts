@@ -61,3 +61,5 @@ describe('getTotalDices', () => {
         });
     });
 });
+
+/* Rajouter des tests pour la solution */
