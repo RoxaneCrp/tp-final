@@ -5,6 +5,7 @@ test.describe('Calculator App', () => {
     await page.goto('http://localhost:5173');
   });
 
+    test.describe('operations', () => {
   test.describe('addition', () => {
     test('performs basic addition correctly', async ({ page }) => {
         await page.click('button:text("1")');
