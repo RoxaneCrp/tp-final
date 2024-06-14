@@ -100,23 +100,6 @@ test.describe('Calculator App', () => {
         });
     });
 
-    test('clears display with "C" button', async ({ page }) => {
-        await page.click('button:text("3")');
-        await page.click('button:text("+")');
-        await page.click('button:text("5")');
-        await page.click('button:text("=")');
-        await page.click('button:text("C")');
-        const screenValue = await page.textContent('.screen');
-        expect(screenValue).toBe('0');
-    });
-    
-    test('changes "=" button color to red', async ({ page }) => {
-        const buttonColor = await page.$eval('button:text("=")', (button) => {
-          return button.classList.contains('red');
-        });
-        expect(buttonColor).toBeTruthy();
-    });
-
     test.describe('number buttons', () => {
         test('displays number 0 on screen when clicked', async ({ page }) => {
             await page.click('button:text("0")');
@@ -178,4 +161,27 @@ test.describe('Calculator App', () => {
             expect(screenValue).toBe('9');
         });
     });
+
+    test('clears display with "C" button', async ({ page }) => {
+        await page.click('button:text("3")');
+        await page.click('button:text("+")');
+        await page.click('button:text("5")');
+        await page.click('button:text("=")');
+        await page.click('button:text("C")');
+        const screenValue = await page.textContent('.screen');
+        expect(screenValue).toBe('0');
+    });
+    
+    test('changes "=" button color to red', async ({ page }) => {
+        const buttonColor = await page.$eval('button:text("=")', (button) => {
+            return button.style.backgroundColor === 'red';
+        });
+        expect(buttonColor).toBeTruthy();
+    });
 });
+
+
+/* Bug détecté */
+// Les tests sur l'adition m'ont permis de voir que l'addtion ne fonctionne pas. C'est la soustraction qui est effectuée à la place.
+// Les tests sur la soustraction m'ont permis de voir que la soustraction ne fonctionne pas. C'est l'addition qui est effectuée à la place.
+// Les chiffres 3 et 5 sont inversés
