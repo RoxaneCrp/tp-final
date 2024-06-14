@@ -22,4 +22,42 @@ describe('getTotalDices', () => {
             expect(getTotalTeamDices(['pink'])).toBe(3);
         });
     });
+
+    describe('power dices', () => {
+        describe('orange power', () => {
+          it('should return 1 if group size is odd', () => {
+            expect(getTotalTeamDices(['orange', 'green', 'green'])).toBe(1 + 1 + 1);
+          });
+          it('should return 2 if group size is even', () => {
+            expect(getTotalTeamDices(['orange', 'green'])).toBe(2 + 1);
+          });
+        });
+      
+        describe('blue power', () => {
+          it('should return number of dice in other group (1 dice)', () => {
+            expect(getTotalDices([['blue'], ['green']])).toBe([[1], [1]]);
+          });
+          it('should return number of dice in other group (2 dice)', () => {
+            expect(getTotalDices([['blue'], ['green', 'gray']])).toBe([[2], [1, 2]]);
+          });
+          it('should handle multiple blue dice correctly', () => {
+            expect(getTotalDices([['blue', 'blue'], ['green', 'gray']])).toBe([[2, 2], [1, 2]]);
+          });
+        });
+      
+        describe('pink power', () => {
+          it('should return 3 and set lowest value dice in group to 0', () => {
+            expect(getTotalTeamDices(['pink', 'green'])).toBe(3 + (1 - 1));
+          });
+          it('should set all lowest value dices in group to 0', () => {
+            expect(getTotalTeamDices(['pink', 'green', 'green'])).toBe(3 + (1 - 1) + (1 - 1));
+          });
+          it('should set all lowest value dices in group to 0', () => {
+            expect(getTotalTeamDices(['pink', 'green', 'gray'])).toBe(3 + (1 - 1) + 2);
+          });
+          it('should handle multiple pink dice correctly', () => {
+            expect(getTotalTeamDices(['pink', 'pink', 'green', 'gray'])).toBe(3 + 3 + (1 - 1) + 2);
+          });
+        });
+    });
 });
