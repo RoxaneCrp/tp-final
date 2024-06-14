@@ -1,4 +1,4 @@
-import { getTotalDices, getTotalTeamDices } from '../PierreCoba';
+import { getTotalDices, getTotalTeamDices } from '../../modules/pierre_coba/PierreCoba';
 import { expect, describe, it } from 'vitest';
 
 describe('getTotalDices', () => {
